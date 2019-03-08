@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo -n "Getting version from version.sbt..." >&2
+SBT_VERSION=$(cut -d\" -f 2 < version.sbt)
+echo ${SBT_VERSION}
+
+echo -n "Adding information from git context..." >&2
+REV_COUNT=$(git rev-list --count HEAD)
+OFFSET=1
+REV_OFFSET=$((REV_COUNT - OFFSET))
+DATE_ARG=$(date +%Y%m%d)
+SNAPSHOT_IDENTIFIER="-${REV_OFFSET}+${DATE_ARG}"
+SBT_VERSION=${SBT_VERSION/-SNAPSHOT/${SNAPSHOT_IDENTIFIER}}
+GIT_COMMITTED_AT=$(git show -s --format=%ct)
+
+echo "Setting build metadata: SBT_VERSION=$SBT_VERSION GIT_COMMITTED_AT=$GIT_COMMITTED_AT" >&2
+buildkite-agent meta-data set env-SBT_VERSION ${SBT_VERSION}
+buildkite-agent meta-data set env-GIT_COMMITTED_AT ${GIT_COMMITTED_AT}

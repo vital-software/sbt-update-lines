@@ -1,0 +1,56 @@
+env:
+  BASE_TAG: "vital-scala-${BUILDKITE_COMMIT}"
+
+steps:
+  - name: ":sbt: Store version and meta data"
+    command: .buildkite/store-version-metadata
+
+  - name: ":docker: :quay: Build and push base"
+    agents:
+      queue: docker-build
+    plugins:
+      vital-software/docker-compose#vital-v2.5:
+        config:
+          - docker-compose.yml
+          - docker-compose.buildkite.yml
+        build: sbt-update-line-base
+        image_repository: quay.io/vital/build-cache
+        image-name: ${BASE_TAG}
+
+  - wait
+
+  - name: ":scala: Run sbt scripted tests"
+    command: sbt -batch -v scripted
+    timeout_in_minutes: 15
+    plugins:
+      vital-software/metadata-env#v0.0.1:
+        get: [SBT_VERSION, GIT_COMMITTED_AT]
+      vital-software/docker-compose#vital-v2.5:
+        config:
+          - docker-compose.yml
+          - docker-compose.buildkite.yml
+        run: sbt-update-line-base
+        log_all: true
+
+  - wait: ~
+    continue_on_failure: true
+
+  - name: ":scala: Report on compile problems"
+    command: .buildkite/report-compile-problems
+
+# Marker: version-release
+  - wait
+
+  - block: ":rocket: Release"
+    prompt: Create a release, and push it to Github?
+    branches: "master ci/release"
+
+  - name: ":sbt: Release new version"
+    branches: master
+    command:
+      - git checkout -B ${BUILDKITE_BRANCH}
+      - git branch -u origin/${BUILDKITE_BRANCH}
+      - git config branch.${BUILDKITE_BRANCH}.remote origin
+      - git config branch.${BUILDKITE_BRANCH}.merge refs/heads/${BUILDKITE_BRANCH}
+      - git clean -df
+      - sbt -batch "release with-defaults skip-tests"

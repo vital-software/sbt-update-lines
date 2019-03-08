@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ ${BUILDKITE_MESSAGE:-unknown} == "Setting version to"* ]]; then
+  echo "Skipping release steps because just updating release version" >&2
+  cat .buildkite/pipeline.yml | sed -n '/version-release/q;p' | buildkite-agent pipeline upload
+else
+  cat .buildkite/pipeline.yml | buildkite-agent pipeline upload
+fi
