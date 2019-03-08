@@ -1,4 +1,4 @@
-# sbt-update-line
+# sbt-update-lines
 
 SBT plugin for updating lines in README and other files as part of a release
 

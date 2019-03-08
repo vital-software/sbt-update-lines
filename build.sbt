@@ -11,7 +11,7 @@ lazy val root = (project in file("."))
   .enablePlugins(SbtPlugin)
   .settings(
     organization := "co.vitaler",
-    name := "sbt-update-line",
+    name := "sbt-update-lines",
     scriptedLaunchOpts += ("-Dplugin.version=" + version.value),
     scriptedBufferLog := false,
     sbtPlugin := true,
@@ -41,7 +41,7 @@ val updateReleaseFiles = ReleaseStep { state =>
     state,
     "README.md",
     "// Latest release",
-    v => s"""libraryDependencies += "co.vitaler" % "sbt-update-line" % "$v" // Latest release"""
+    v => s"""libraryDependencies += "co.vitaler" % "sbt-update-lines" % "$v" // Latest release"""
   )
 
   updateLine(

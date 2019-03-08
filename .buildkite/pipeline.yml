@@ -13,7 +13,7 @@ steps:
         config:
           - docker-compose.yml
           - docker-compose.buildkite.yml
-        build: sbt-update-line-base
+        build: sbt-update-lines-base
         image_repository: quay.io/vital/build-cache
         image-name: ${BASE_TAG}
 
@@ -29,7 +29,7 @@ steps:
         config:
           - docker-compose.yml
           - docker-compose.buildkite.yml
-        run: sbt-update-line-base
+        run: sbt-update-lines-base
         log_all: true
 
   - wait: ~

@@ -3,7 +3,7 @@
 set -o pipefail
 
 mkdir -p compile-logs
-buildkite-agent artifact download "docker-compose-log-all/*sbt-update-line-base_build*.log" compile-logs --step ":scala: :codeclimate: Run tests and report coverage"
+buildkite-agent artifact download "docker-compose-log-all/*sbt-update-lines-base_build*.log" compile-logs --step ":scala: :codeclimate: Run tests and report coverage"
 
 warnings=$(cat compile-logs/**/*.log | \
   perl -pe 's/\x1b\[[0-9;]*[a-zA-Z]//g' | \
