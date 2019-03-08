@@ -1,7 +1,7 @@
 version: "2.3"
 
 services:
-  scala-common-base:
+  sbt-update-lines-base:
     environment:
       # Add any other CI-specific environment variables here
       - AWS_ACCESS_KEY_ID_VITAL_REPO
