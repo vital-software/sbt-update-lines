@@ -1,0 +1,6 @@
+$ exec git init
+> release with-defaults
+$ exists README.md
+> checkReadme
+$ exists CHANGELOG.md
+> checkChangelog
