@@ -1,0 +1,19 @@
+version: "2.3"
+
+services:
+  scala-common-base:
+    environment:
+      # Add any other CI-specific environment variables here
+      - AWS_ACCESS_KEY_ID_VITAL_REPO
+      - AWS_SECRET_KEY_VITAL_REPO
+      - BUILDKITE
+      - BUILDKITE_BRANCH
+      - BUILDKITE_BUILD_NUMBER
+      - BUILDKITE_BUILD_URL
+      - BUILDKITE_COMMIT
+      - BUILDKITE_PROJECT_SLUG
+      - BUILDKITE_PULL_REQUEST
+      - BUILDKITE_REPO
+      - CC_TEST_REPORTER_ID
+      - CI
+      - GIT_COMMITTED_AT

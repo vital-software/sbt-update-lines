@@ -1,0 +1,7 @@
+version: "2.3"
+
+services:
+  scala-common-base:
+    build:
+      context: .
+    image: quay.io/vital/build-cache:sbt-update-lines-base-latest
