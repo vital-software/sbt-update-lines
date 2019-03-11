@@ -57,7 +57,7 @@ updateLinesSchema := Seq(
     (v, _) => s"""addSbtPlugin("co.vitaler" % "sbt-update-lines" % "$v")     // Latest release"""
   ),
   UpdateLine(
-    file("README.md"),
+    file("CHANGELOG.md"),
     _.matches("## \\[Unreleased\\]"),
     (v, _) => s"## [Unreleased]\n\n## [$v] - ${java.time.LocalDate.now}"
   )
