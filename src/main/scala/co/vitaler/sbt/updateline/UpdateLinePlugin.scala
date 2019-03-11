@@ -1,6 +1,7 @@
 package co.vitaler.sbt.updateline
 
-import sbt.{ AutoPlugin, Def, Plugins, _ }
+import sbt._
+import Keys._
 import sbtrelease.{ ReleasePlugin, Vcs }
 import sbtrelease.ReleasePlugin.autoImport._
 
@@ -8,6 +9,7 @@ import scala.sys.process.ProcessLogger
 
 object UpdateLinePlugin extends AutoPlugin {
   override val requires: Plugins = ReleasePlugin
+  override def trigger: PluginTrigger = AllRequirements
 
   object autoImport {
     /**
@@ -20,9 +22,10 @@ object UpdateLinePlugin extends AutoPlugin {
      */
     case class UpdateLine(fileToModify: File, lineMatcher: String => Boolean, replacement: (String, String) => String, updateVcs: Boolean = true)
 
-    val updateLinesSchema = settingKey[Seq[UpdateLine]]("A sequence of UpdateLine definitions (of lines to update on release)")
+    lazy val updateLinesSchema = settingKey[Seq[UpdateLine]]("A sequence of UpdateLine definitions (of lines to update on release)")
+    lazy val updateLinesStandalone = taskKey[Unit]("Performs a standalone test of the updates that would happen on release of the version \"X.Y.Z\"")
 
-    val updateLines = ReleaseStep { state =>
+    lazy val updateLines = ReleaseStep { state =>
       val logger: ProcessLogger = processLogger(state)
       val version: String = releaseVersion(state)
       val vcs: Option[Vcs] = maybeVcs(state)
@@ -39,6 +42,10 @@ object UpdateLinePlugin extends AutoPlugin {
 
   override lazy val globalSettings: Seq[Setting[_]] = Seq(
     updateLinesSchema := Seq.empty[UpdateLine],
+    updateLinesStandalone := {
+      streams.value.log.info("Running updateLines for version X.Y.Z as standalone test")
+      updateLines(state.value.put(ReleaseKeys.versions, ("X.Y.Z", "not-used")))
+    },
   )
 
   private def processLogger(state: State): ProcessLogger = new ProcessLogger {

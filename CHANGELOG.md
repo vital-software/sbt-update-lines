@@ -6,6 +6,7 @@
 
 ### Added
 
+- Added `updateLinesStandalone` task to test file updates without running a release
 - Own version of sbt-update-lines is also updated on release
 
 ### Changed
