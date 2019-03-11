@@ -1,0 +1,5 @@
+> updateLinesTest
+$ exists README.md
+> checkReadme
+$ exists CHANGELOG.md
+> checkChangelog
