@@ -1,5 +1,7 @@
 # sbt-update-lines
 
+[![Build Status](https://badge.buildkite.com/4ccfb35115aea9504d88cd08aa7256309efc870fb4c7a365d6.svg)](https://buildkite.com/vital/sbt-update-lines)
+
 SBT plugin for updating lines in README and other files as part of a release.
 Depends on the [sbt-release plugin](https://github.com/sbt/sbt-release).
 
