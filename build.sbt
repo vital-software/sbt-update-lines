@@ -54,7 +54,7 @@ updateLinesSchema := Seq(
   UpdateLine(
     file("README.md"),
     _.matches("addSbtPlugin.*// Latest release"),
-    (v, _) => s"""addSbtPlugin("co.vitaler" % "sbt-update-lines" % "$v")   // Latest release"""
+    (v, _) => s"""addSbtPlugin("co.vitaler" % "sbt-update-lines" % "$v")     // Latest release"""
   ),
   UpdateLine(
     file("README.md"),
