@@ -11,7 +11,7 @@ In `project/plugins.sbt`, add the plugin:
 resolvers += Resolver.bintrayIvyRepo("vitaler", "sbt-plugins")
 
 addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.11")
-addSbtPlugin("co.vitaler" % "sbt-update-lines" % "0.0.3")    // Latest release
+addSbtPlugin("co.vitaler" % "sbt-update-lines" % "0.0.4")    // Latest release
 ```
 
 ## Usage

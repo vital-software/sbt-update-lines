@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [0.0.4] - 2019-03-11
+
 ## Changed
 
 - Updated sbt-release dependency to 1.0.11
