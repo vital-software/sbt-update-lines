@@ -12,33 +12,37 @@ addSbtPlugin("co.vitaler" % "sbt-update-line" % "0.0.1") // Latest release
 
 ## Usage
 
-First, define the `updateLinesSchema` setting, which is a `Seq[UpdateLine]`
+First, define the `updateLinesSchema` setting, which is a `Seq[UpdateLine]`. The
+definition of an `UpdateLine` is:
+
+```scala
+case class UpdateLine(fileToModify: File, lineMatcher: String => Boolean, replacement: (String, String) => String, updateVcs: Boolean = true)
+```
+
+The `lineMatcher` receives each line, and should return `true` for any that
+should be updated. Common uses are `_.contains` or `_.matches`. The `replacement`
+function receives the version being released and each line
+being updated, and should return a string to use as a replacement line (with no
+trailing line terminator). An example might look like:
 
 ```sbt
 updateLinesSchema := Seq(
   UpdateLine(
     file("README.md"),
-    "// Latest release",
-    v => s"""libraryDependencies += "org.example" % "package" % "$v" // Latest release"""
+    _.contains("// Latest release"),
+    (v, _) => s"""libraryDependencies += "org.example" % "package" % "$v" // Latest release"""
   ),
   UpdateLine(
     file("CHANGELOG.md"),
-    "## [Unreleased]",
-    v => s"## [Unreleased]\n\n## [$v] - ${java.time.LocalDate.now}"
+    _.matches("## \\[Unreleased\\]"),
+    (v, _) => s"## [Unreleased]\n\n## [$v] - ${java.time.LocalDate.now}"
   )
 )
 ```
 
-The definition of an `UpdateLine` is:
-
-```scala
-case class UpdateLine(fileToModify: File, lineMarker: String, replacement: String => String)
-```
-
-The `replacement` function receives the version being released, and should return
-the replacement for the line where `lineMarker` was found.
-
-Finally, add the `updateLines` release step to your `sbt-release` release process:
+Finally, to actually update the lines, add the `updateLines` release step to your
+`sbt-release` release process (anywhere after the `setReleaseVersion` step which
+defines the release version):
 
 ```sbt
 releaseProcess := Seq(
@@ -50,6 +54,6 @@ releaseProcess := Seq(
 )
 ```
 
-Note that the changes to the files you specify will be committed along with the
-changes to `version.sbt` if you call `commitReleaseVersion` (this is usually
-what you want).
+If you leave the `updateVcs` parameter of the `UpdateLine` set to `true`, the
+updated lines will be committed along with the changes to `version.sbt` when you
+call `commitReleaseVersion`.

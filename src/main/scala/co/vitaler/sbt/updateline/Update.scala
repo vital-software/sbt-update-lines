@@ -27,7 +27,7 @@ object Update {
     }
 
     val updated: List[String] = matchingLines.foldLeft(lines) { (content, line) =>
-      content.updated(line, update.replacement(version))
+      content.updated(line, update.replacement(version, content(line)))
     }
 
     Files.write(path, (updated.mkString("\n") + "\n").getBytes(StandardCharsets.UTF_8))

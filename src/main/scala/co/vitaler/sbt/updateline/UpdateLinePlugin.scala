@@ -10,9 +10,17 @@ object UpdateLinePlugin extends AutoPlugin {
   override val requires: Plugins = ReleasePlugin
 
   object autoImport {
-    case class UpdateLine(fileToModify: File, lineMatcher: String => Boolean, replacement: String => String, updateVcs: Boolean = true)
+    /**
+     * Represents a line update that should be performed during the updateLines ReleaseStep
+     *
+     * @param fileToModify The file that should be updated
+     * @param lineMatcher A function to match lines that should be updated
+     * @param replacement A function that receives the version being released, and the line being updated, and returns the updated line
+     * @param updateVcs Whether the updated files should be added to the configured VCS
+     */
+    case class UpdateLine(fileToModify: File, lineMatcher: String => Boolean, replacement: (String, String) => String, updateVcs: Boolean = true)
 
-    val updateLinesSchema = settingKey[Seq[UpdateLine]]("Definition of lines to update")
+    val updateLinesSchema = settingKey[Seq[UpdateLine]]("A sequence of UpdateLine definitions (of lines to update on release)")
 
     val updateLines = ReleaseStep { state =>
       val logger: ProcessLogger = processLogger(state)

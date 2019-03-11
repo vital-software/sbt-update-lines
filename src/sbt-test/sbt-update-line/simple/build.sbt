@@ -7,13 +7,13 @@ version := "1.0.0-SNAPSHOT"
 updateLinesSchema := Seq(
   UpdateLine(
     file("README.md"),
-    "// Latest release",
-    v => s"""libraryDependencies += "org.example" % "package" % "$v" // Latest release"""
+    _.contains("// Latest release"),
+    (v, _) => s"""libraryDependencies += "org.example" % "package" % "$v" // Latest release"""
   ),
   UpdateLine(
     file("CHANGELOG.md"),
-    "## [Unreleased]",
-    v => s"## [Unreleased]\n\n## [$v] - ${java.time.LocalDate.now}"
+    _.matches("## \\[Unreleased\\]"),
+    (v, _) => s"## [Unreleased]\n\n## [$v] - ${java.time.LocalDate.now}"
   )
 )
 

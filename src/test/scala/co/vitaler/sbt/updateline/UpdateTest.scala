@@ -20,14 +20,14 @@ class UpdateTest extends Specification with Mockito with TempFile {
       "multiple matches" in {
         val logger = new StringProcessLogger
         val file: File = temporaryCopy(example)
-        Update.apply(UpdateLine(file, _.contains("// Latest release"), v => s"replaced: $v", updateVcs = false), "1.0.0", logger, None)
+        Update.apply(UpdateLine(file, _.contains("// Latest release"), (v, _) => s"replaced: $v", updateVcs = false), "1.0.0", logger, None)
         Source.fromFile(file).getLines().count(_.matches("replaced: 1\\.0\\.0")) must beEqualTo(2)
       }
 
       "single match" in {
         val logger = new StringProcessLogger
         val file: File = temporaryCopy(example)
-        Update.apply(UpdateLine(file, _.matches(".*// Latest release - 1"), v => s"replaced: $v", updateVcs = false), "1.0.0", logger, None)
+        Update.apply(UpdateLine(file, _.matches(".*// Latest release - 1"), (v, _) => s"replaced: $v", updateVcs = false), "1.0.0", logger, None)
         Source.fromFile(file).getLines().count(_.matches("replaced: 1\\.0\\.0")) must beEqualTo(1)
       }
     }
@@ -36,7 +36,7 @@ class UpdateTest extends Specification with Mockito with TempFile {
       "fail if no VCS is available when needed" in {
         val logger = new StringProcessLogger
         val file: File = temporaryCopy(example)
-        Update.apply(UpdateLine(file, _ => true, _ => "blah"), "1.0.0", logger, None) must throwA[RuntimeException]
+        Update.apply(UpdateLine(file, _ => true, (_, _) => "blah"), "1.0.0", logger, None) must throwA[RuntimeException]
       }
 
       "add the modified files to the VCS" in {
@@ -46,7 +46,7 @@ class UpdateTest extends Specification with Mockito with TempFile {
         val vcs = mock[Vcs]
         vcs.add(any[String]) returns new ProcessBuilder("true")
 
-        Update.apply(UpdateLine(file, _ => true, _ => "blah"), "1.0.0", logger, Some(vcs))
+        Update.apply(UpdateLine(file, _ => true, (_, _) => "blah"), "1.0.0", logger, Some(vcs))
         there was one(vcs).add(any[String])
       }
     }
