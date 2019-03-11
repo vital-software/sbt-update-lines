@@ -4,9 +4,17 @@
 
 ## [Unreleased]
 
+### Added
+
+- Own version of sbt-update-lines is also updated on release
+
+### Changed
+
+- No longer building for 1.1.x (should be binary compatible anyway)
+
 ## [0.0.4] - 2019-03-11
 
-## Changed
+### Changed
 
 - Updated sbt-release dependency to 1.0.11
 - updateLinesSchema defined in globalSettings

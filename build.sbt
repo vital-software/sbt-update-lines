@@ -5,7 +5,7 @@ name := "sbt-update-lines"
 description := "Updates lines in e.g. README.md files when using sbt-release"
 
 sbtPlugin := true
-crossSbtVersions := Vector("1.1.6", "1.2.8")
+crossSbtVersions := Vector("1.2.8")
 scalaVersion := "2.12.8"
 
 scriptedLaunchOpts += ("-Dplugin.version=" + version.value)
