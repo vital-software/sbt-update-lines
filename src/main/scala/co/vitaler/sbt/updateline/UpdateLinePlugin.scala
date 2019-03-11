@@ -37,7 +37,7 @@ object UpdateLinePlugin extends AutoPlugin {
 
   import autoImport._
 
-  override lazy val projectSettings: Seq[Def.Setting[_]] = Seq(
+  override lazy val globalSettings: Seq[Setting[_]] = Seq(
     updateLinesSchema := Seq.empty[UpdateLine],
   )
 

@@ -7,6 +7,7 @@
 ## Changed
 
 - Updated sbt-release dependency to 1.0.11
+- updateLinesSchema defined in globalSettings
 
 ## [0.0.3] - 2019-03-11
 
