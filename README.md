@@ -7,9 +7,8 @@ SBT plugin for updating lines in README and other files as part of a release
 In `project/plugins.sbt`:
 
 ```sbt
-resolvers += Resolver.bintrayRepo("vitaler", "sbt-plugins")
+resolvers += Resolver.bintrayIvyRepo("vitaler", "sbt-plugins")
 addSbtPlugin("co.vitaler" % "sbt-update-lines" % "0.0.2")   // Latest release
-libraryDependencies += "co.vitaler" % "sbt-update-lines" % "0.0.2" // Latest release
 ```
 
 ## Usage
