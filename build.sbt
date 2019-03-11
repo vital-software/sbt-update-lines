@@ -58,6 +58,7 @@ publishTo := {
     Some("Releases" at repo + "releases")
 }
 publishMavenStyle := false
+licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
 
 // Release settings
 releaseProcess := Seq[ReleaseStep](
