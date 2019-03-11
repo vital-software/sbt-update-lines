@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [0.0.3] - 2019-03-11
+
 ### Changed
 
 - Use sbt-update-lines within this project too

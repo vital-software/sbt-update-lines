@@ -8,7 +8,7 @@ In `project/plugins.sbt`:
 
 ```sbt
 resolvers += Resolver.bintrayIvyRepo("vitaler", "sbt-plugins")
-addSbtPlugin("co.vitaler" % "sbt-update-lines" % "0.0.2")   // Latest release
+addSbtPlugin("co.vitaler" % "sbt-update-lines" % "0.0.3")     // Latest release
 ```
 
 ## Usage
