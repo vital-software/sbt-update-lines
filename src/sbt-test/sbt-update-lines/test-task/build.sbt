@@ -1,6 +1,6 @@
 import scala.io.{ Codec, Source }
 
-version := "1.0.0-SNAPSHOT"
+version := "1.2.3-SNAPSHOT"
 
 updateLinesSchema := Seq(
   UpdateLine(
@@ -19,9 +19,7 @@ updateLinesSchema := Seq(
 
 TaskKey[Unit]("checkReadme") := {
   val lines = Source.fromFile(file("README.md"))(Codec.UTF8).getLines().toList
-  lines.foreach(println)
-
-  if (!lines.contains("libraryDependencies += \"org.example\" % \"package\" % \"1.0.0\" // Latest release")) {
+  if (!lines.contains("libraryDependencies += \"org.example\" % \"package\" % \"X.Y.Z\" // Latest release")) {
     sys.error("Could not find expected update to README.md")
   }
   ()
@@ -29,9 +27,7 @@ TaskKey[Unit]("checkReadme") := {
 
 TaskKey[Unit]("checkChangelog") := {
   val lines = Source.fromFile(file("CHANGELOG.md"))(Codec.UTF8).getLines().toList
-  lines.foreach(println)
-
-  if (!lines.exists(_.matches("""^## \[1\.0\.0\] - .*"""))) {
+  if (!lines.exists(_.matches("""^## \[X\.Y\.Z] - .*"""))) {
     sys.error("Could not find expected update to CHANGELOG.md")
   }
   ()

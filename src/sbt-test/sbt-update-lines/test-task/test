@@ -1,4 +1,5 @@
-> updateLinesTest
+$ exec git init
+> updateLinesStandalone
 $ exists README.md
 > checkReadme
 $ exists CHANGELOG.md
