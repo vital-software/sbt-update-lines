@@ -27,14 +27,17 @@ Test / scalacOptions ++= Seq("-Yrangepos")
 addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.8")
 enablePlugins(SbtPlugin)
 
-// PGP settings
-pgpPassphrase := Some(Array())
-usePgpKeyHex("1bfe664d074b29f8")
-useGpg := true
+// GPG settings
+credentials += Credentials(
+  "GnuPG Key ID",
+  "gpg",
+  "B9513278AF9A10374E07A88FAA24C7523BD70F36",
+  "ignored"
+)
 
 // Publishing
 bintrayRepository := "sbt-plugins"
-bintrayOrganization in bintray := Some("vitaler")
+bintrayOrganization := Some("vitaler")
 publishMavenStyle := false
 licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
 
@@ -46,7 +49,7 @@ releaseProcess := Seq[ReleaseStep](
   setReleaseVersion,
   updateReleaseFiles,
   commitReleaseVersion,
-  releaseStepCommandAndRemaining("+publishSigned"),
+  publishArtifacts,
   tagRelease,
   setNextVersion,
   commitNextVersion,
