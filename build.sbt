@@ -1,9 +1,6 @@
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 
-import com.amazonaws.auth.AWSCredentialsProviderChain
-import com.amazonaws.auth.profile.ProfileCredentialsProvider
-import fm.sbt.S3URLHandler
 import sbt.Keys.name
 import sbtrelease.ReleaseStateTransformations._
 
@@ -28,35 +25,15 @@ libraryDependencies ++= Seq(
 Test / scalacOptions ++= Seq("-Yrangepos")
 
 addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.8")
-
-lazy val root = (project in file("."))
-  .enablePlugins(SbtPlugin)
+enablePlugins(SbtPlugin)
 
 // PGP settings
 pgpPassphrase := Some(Array())
 usePgpKeyHex("1bfe664d074b29f8")
 
 // Publishing
-resolvers ++= Seq(
-  "Vital Snapshots" at "s3://vital-repo.s3-us-west-2.amazonaws.com/maven/snapshots",
-  "Vital Releases" at "s3://vital-repo.s3-us-west-2.amazonaws.com/maven/releases",
-)
-
-s3CredentialsProvider := { bucket: String =>
-  new AWSCredentialsProviderChain(
-    new ProfileCredentialsProvider("profile vital-master"),
-    new ProfileCredentialsProvider("default"),
-    S3URLHandler.defaultCredentialsProviderChain(bucket)
-  )
-}
-
-publishTo := {
-  val repo = "s3://vital-repo.s3-us-west-2.amazonaws.com/maven/"
-  if (isSnapshot.value)
-    Some("Snapshots" at repo + "snapshots")
-  else
-    Some("Releases" at repo + "releases")
-}
+bintrayRepository := "sbt-plugins"
+bintrayOrganization in bintray := Some("vitaler")
 publishMavenStyle := false
 licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
 
