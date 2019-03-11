@@ -63,7 +63,7 @@ updateLinesSchema := Seq(
   ),
   UpdateLine(
     file("project/plugins.sbt"),
-    _.matches(s"""addSbtPlugin\("co.vitaler" % "sbt-update-lines" % .*"""),
+    _.matches(s"""addSbtPlugin\\("co.vitaler" % "sbt-update-lines" % .*"""),
     (v, _) => s"""addSbtPlugin("co.vitaler" % "sbt-update-lines" % "$v")"""
   )
 )
