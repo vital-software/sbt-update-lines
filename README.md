@@ -16,7 +16,12 @@ First, define the `updateLinesSchema` setting, which is a `Seq[UpdateLine]`. The
 definition of an `UpdateLine` is:
 
 ```scala
-case class UpdateLine(fileToModify: File, lineMatcher: String => Boolean, replacement: (String, String) => String, updateVcs: Boolean = true)
+case class UpdateLine(
+  fileToModify: File,
+  lineMatcher: String => Boolean,
+  replacement: (String, String) => String,
+  updateVcs: Boolean = true
+)
 ```
 
 The `lineMatcher` receives each line, and should return `true` for any that
