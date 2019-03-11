@@ -18,7 +18,7 @@ libraryDependencies ++= Seq(
 
 Test / scalacOptions ++= Seq("-Yrangepos")
 
-addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.8")
+addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.11")
 enablePlugins(SbtPlugin)
 
 // GPG settings
@@ -54,7 +54,7 @@ updateLinesSchema := Seq(
   UpdateLine(
     file("README.md"),
     _.matches("addSbtPlugin.*// Latest release"),
-    (v, _) => s"""addSbtPlugin("co.vitaler" % "sbt-update-lines" % "$v")     // Latest release"""
+    (v, _) => s"""addSbtPlugin("co.vitaler" % "sbt-update-lines" % "$v")    // Latest release"""
   ),
   UpdateLine(
     file("CHANGELOG.md"),

@@ -1,14 +1,17 @@
 # sbt-update-lines
 
-SBT plugin for updating lines in README and other files as part of a release
+SBT plugin for updating lines in README and other files as part of a release.
+Depends on the [sbt-release plugin](https://github.com/sbt/sbt-release).
 
 ## Installing
 
-In `project/plugins.sbt`:
+In `project/plugins.sbt`, add the plugin:
 
 ```sbt
 resolvers += Resolver.bintrayIvyRepo("vitaler", "sbt-plugins")
-addSbtPlugin("co.vitaler" % "sbt-update-lines" % "0.0.3")     // Latest release
+
+addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.11")
+addSbtPlugin("co.vitaler" % "sbt-update-lines" % "0.0.3")    // Latest release
 ```
 
 ## Usage
@@ -47,7 +50,7 @@ updateLinesSchema := Seq(
 ```
 
 Finally, to actually update the lines, add the `updateLines` release step to your
-`sbt-release` release process (anywhere after the `setReleaseVersion` step which
+sbt-release process (anywhere after the `setReleaseVersion` step which
 defines the release version):
 
 ```sbt
