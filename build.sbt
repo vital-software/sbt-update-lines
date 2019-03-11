@@ -30,6 +30,7 @@ enablePlugins(SbtPlugin)
 // PGP settings
 pgpPassphrase := Some(Array())
 usePgpKeyHex("1bfe664d074b29f8")
+useGpg := true
 
 // Publishing
 bintrayRepository := "sbt-plugins"
