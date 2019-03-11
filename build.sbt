@@ -60,5 +60,10 @@ updateLinesSchema := Seq(
     file("CHANGELOG.md"),
     _.matches("## \\[Unreleased\\]"),
     (v, _) => s"## [Unreleased]\n\n## [$v] - ${java.time.LocalDate.now}"
+  ),
+  UpdateLine(
+    file("project/plugins.sbt"),
+    _.matches(s"""addSbtPlugin\("co.vitaler" % "sbt-update-lines" % .*"""),
+    (v, _) => s"""addSbtPlugin("co.vitaler" % "sbt-update-lines" % "$v")"""
   )
 )
