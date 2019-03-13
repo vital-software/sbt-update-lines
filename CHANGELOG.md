@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [0.1.1] - 2019-03-13
+
 ### Changed
 
 - Added an example of using the matched line in the `simple` scripted test
@@ -49,7 +51,8 @@
 - Initial import
 
 
-[Unreleased]: https://github.com/vital-software/sbt-update-lines/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/vital-software/sbt-update-lines/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/vital-software/sbt-update-lines/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/vital-software/sbt-update-lines/compare/v0.0.4...v0.1.0
 [0.0.4]: https://github.com/vital-software/sbt-update-lines/compare/v0.0.3...v0.0.4
 [0.0.3]: https://github.com/vital-software/sbt-update-lines/compare/v0.0.2...v0.0.3
