@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Added an example of using the matched line in the `simple` scripted test
+
 ## [0.1.0] - 2019-03-11
 
 ### Added
