@@ -10,8 +10,6 @@ Depends on the [sbt-release plugin](https://github.com/sbt/sbt-release).
 In `project/plugins.sbt`, add the plugin:
 
 ```sbt
-resolvers += Resolver.bintrayIvyRepo("vitaler", "sbt-plugins")
-
 addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.11")
 addSbtPlugin("co.vitaler" % "sbt-update-lines" % "0.1.0")    // Latest release
 ```
