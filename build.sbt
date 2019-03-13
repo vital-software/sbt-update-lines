@@ -50,6 +50,7 @@ releaseProcess := Seq[ReleaseStep](
   pushChanges
 )
 
+val unreleasedCompare = """^\[Unreleased\]: https://github\.com/(.*)/compare/(.*)\.\.\.HEAD$""".r
 updateLinesSchema := Seq(
   UpdateLine(
     file("README.md"),
@@ -60,6 +61,14 @@ updateLinesSchema := Seq(
     file("CHANGELOG.md"),
     _.matches("## \\[Unreleased\\]"),
     (v, _) => s"## [Unreleased]\n\n## [$v] - ${java.time.LocalDate.now}"
+  ),
+  UpdateLine(
+    file("CHANGELOG.md"),
+    unreleasedCompare.unapplySeq(_).isDefined,
+    (v, compareLine) => compareLine match {
+      case unreleasedCompare(project, previous) =>
+        s"[Unreleased]: https://github.com/$project/compare/v$v...HEAD\n[$v]: https://github.com/$project/compare/$previous...v$v"
+    }
   ),
   UpdateLine(
     file("project/plugins.sbt"),
