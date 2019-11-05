@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [0.1.2] - 2019-11-05
+
 ### Added
 
 - Added additional logging at info level when files are matched
@@ -59,7 +61,8 @@
 - Initial import
 
 
-[Unreleased]: https://github.com/vital-software/sbt-update-lines/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/vital-software/sbt-update-lines/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/vital-software/sbt-update-lines/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/vital-software/sbt-update-lines/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/vital-software/sbt-update-lines/compare/v0.0.4...v0.1.0
 [0.0.4]: https://github.com/vital-software/sbt-update-lines/compare/v0.0.3...v0.0.4
