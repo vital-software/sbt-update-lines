@@ -2,6 +2,7 @@ package co.vitaler.sbt.updateline
 
 import sbt._
 import Keys._
+import sbt.util.Level
 import sbtrelease.{ ReleasePlugin, Vcs }
 import sbtrelease.ReleasePlugin.autoImport._
 
@@ -26,12 +27,13 @@ object UpdateLinePlugin extends AutoPlugin {
     lazy val updateLinesStandalone = taskKey[Unit]("Performs a standalone test of the updates that would happen on release of the version \"X.Y.Z\"")
 
     lazy val updateLines = ReleaseStep { state =>
+      val l: Logger = state.log
       val logger: ProcessLogger = processLogger(state)
       val version: String = releaseVersion(state)
       val vcs: Option[Vcs] = maybeVcs(state)
 
       Project.extract(state).get(updateLinesSchema).foreach { update =>
-        Update.apply(update, version, logger, vcs)
+        Update.apply(update, version, logger, vcs, l)
       }
 
       state
