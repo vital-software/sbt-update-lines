@@ -4,6 +4,14 @@
 
 ## [Unreleased]
 
+### Added
+
+- Added additional logging at info level when files are matched
+
+### Fixed
+
+- Close the resource after reading it fails
+
 ## [0.1.1] - 2019-03-13
 
 ### Changed
