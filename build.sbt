@@ -18,7 +18,7 @@ libraryDependencies ++= Seq(
 
 Test / scalacOptions ++= Seq("-Yrangepos")
 
-addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.11")
+addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.13")
 enablePlugins(SbtPlugin)
 
 // GPG settings
