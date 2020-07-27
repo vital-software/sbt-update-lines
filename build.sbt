@@ -12,8 +12,8 @@ scriptedLaunchOpts += ("-Dplugin.version=" + version.value)
 scriptedBufferLog := false
 
 libraryDependencies ++= Seq(
-  "org.specs2" %% "specs2-core" % "4.3.6" % Test,
-  "org.specs2" %% "specs2-mock" % "4.3.6" % Test,
+  "org.specs2" %% "specs2-core" % "4.10.1" % Test,
+  "org.specs2" %% "specs2-mock" % "4.10.1" % Test,
 )
 
 Test / scalacOptions ++= Seq("-Yrangepos")
