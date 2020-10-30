@@ -7,7 +7,7 @@ steps:
 
   - name: ":docker: :quay: Build and push base"
     agents:
-      queue: docker-build
+      queue: docker
     plugins:
       vital-software/docker-compose#vital-v2.5:
         config:
@@ -67,3 +67,8 @@ steps:
       - git config branch.${BUILDKITE_BRANCH}.merge refs/heads/${BUILDKITE_BRANCH}
       - git clean -df
       - sbt -batch "release with-defaults skip-tests"
+    plugins:
+      - seek-oss/aws-sm#v2.2.1:
+          json-to-env:
+            - secret-id: "global/bintray-credentials"
+              json-key: ".Variables"
