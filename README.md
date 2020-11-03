@@ -11,7 +11,7 @@ In `project/plugins.sbt`, add the plugin:
 
 ```sbt
 addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.11")
-addSbtPlugin("co.vitaler" % "sbt-update-lines" % "0.1.2")    // Latest release
+addSbtPlugin("co.vitaler" % "sbt-update-lines" % "0.1.5")    // Latest release
 ```
 
 ## Usage

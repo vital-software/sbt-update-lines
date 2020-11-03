@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [0.1.5] - 2020-11-03
+
 ## [0.1.2] - 2019-11-05
 
 ### Added
@@ -61,7 +63,8 @@
 - Initial import
 
 
-[Unreleased]: https://github.com/vital-software/sbt-update-lines/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/vital-software/sbt-update-lines/compare/v0.1.5...HEAD
+[0.1.5]: https://github.com/vital-software/sbt-update-lines/compare/v0.1.2...v0.1.5
 [0.1.2]: https://github.com/vital-software/sbt-update-lines/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/vital-software/sbt-update-lines/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/vital-software/sbt-update-lines/compare/v0.0.4...v0.1.0
