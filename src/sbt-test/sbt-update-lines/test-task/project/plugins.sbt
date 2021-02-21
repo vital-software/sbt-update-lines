@@ -1,4 +1,4 @@
-addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.13")
+addSbtPlugin("com.github.sbt" % "sbt-release" % "1.0.15")
 
 sys.props.get("plugin.version") match {
   case Some(x) => addSbtPlugin("co.vitaler" % "sbt-update-lines" % x)
