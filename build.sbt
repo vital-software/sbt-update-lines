@@ -6,7 +6,7 @@ description := "Updates lines in e.g. README.md files when using sbt-release"
 
 sbtPlugin := true
 crossSbtVersions := Vector("1.2.8")
-scalaVersion := "2.12.8"
+scalaVersion := "2.12.13"
 
 scriptedLaunchOpts += ("-Dplugin.version=" + version.value)
 scriptedBufferLog := false
